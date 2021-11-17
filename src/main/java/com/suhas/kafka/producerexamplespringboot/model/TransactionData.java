@@ -4,17 +4,19 @@ package com.suhas.kafka.producerexamplespringboot.model;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
-
 @Getter
 @Setter
 @Builder
-public class UserData implements Serializable {
+@AllArgsConstructor
+@NoArgsConstructor
+public class TransactionData implements Serializable {
+
     private String customerName;
-    private double amountDeposited;
-    private double goldInGrams;
+    private double amountDebited;
     private static final long serialVersionUID = 1L;
 
 }

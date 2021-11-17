@@ -1,11 +1,8 @@
 package com.suhas.kafka.producerexamplespringboot.config;
 
-import com.fasterxml.jackson.databind.ser.std.JsonValueSerializer;
-import com.suhas.kafka.producerexamplespringboot.model.UserData;
+import com.suhas.kafka.producerexamplespringboot.model.TransactionData;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
@@ -20,7 +17,7 @@ import java.util.Map;
 public class KafkaConfig {
 
     @Bean
-    public ProducerFactory<String, UserData> producerFactory(){
+    public ProducerFactory<String, TransactionData> producerFactory(){
 
         Map<String, Object> config =new HashMap<>();
         config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,"127.0.0.1:9092");
@@ -31,8 +28,10 @@ public class KafkaConfig {
     }
 
     @Bean
-    public KafkaTemplate<String,UserData> KafkaTemplate(){
+    public KafkaTemplate<String, TransactionData> KafkaTemplate(){
         return new KafkaTemplate<>(producerFactory());
     }
+
+
 
 }
