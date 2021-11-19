@@ -1,5 +1,7 @@
 package com.suhas.kafka.producerexamplespringboot.controller;
 
+import com.bazaarvoice.legion.schema.emodb.transaction.Transaction;
+import com.bazaarvoice.legion.schema.emodb.transaction.consumer.TransactionConsumer;
 import com.suhas.kafka.producerexamplespringboot.model.TransactionData;
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.KafkaStreams;
@@ -25,6 +27,10 @@ public class StreamController {
     private static final Logger LOGGER = LoggerFactory.getLogger(StreamController.class);
 
 
+    public  static TransactionConsumer mapDatatoConsumer(String name){
+        return TransactionConsumer.newBuilder().setCustomername(name).build();
+    }
+
     public static void main(String[] args) {
 
         Properties streamsConfiguration = new Properties();
@@ -45,6 +51,7 @@ public class StreamController {
                 .mapValues(TransactionData::getCustomerName)
                 .to(OUTPUT_TOPIC, Produced.with(Serdes.String(),Serdes.String()));
 
+
         Topology topology = builder.build();
         KafkaStreams streams = new KafkaStreams(topology, streamsConfiguration);
         streams.start();
@@ -57,3 +64,10 @@ public class StreamController {
 }
 
 
+//
+//builder.stream(
+//        INPUT_TOPIC,
+//        Consumed.with(Serdes.String(), CustomSerdes.TranscationData()))
+//        .filter((s, transactionData) -> transactionData.getAmountDebited() > 50000)
+//        .mapValues(s -> mapDatatoConsumer(s.getCustomerName()))
+//        .to(OUTPUT_TOPIC, Produced.with(Serdes.String(),TransactionConsumer);

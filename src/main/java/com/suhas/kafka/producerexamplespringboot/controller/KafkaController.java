@@ -25,9 +25,9 @@ public class KafkaController {
     public String publishMessage(@PathVariable String username, @PathVariable int amount) {
 
         template.send(TOPIC, TransactionData.builder().customerName(username).amountDebited(amount).build());
-        LOGGER.info("object of username : {}  was published successfully ", username + amount);
+        LOGGER.info("object of username : {} with amount {} was published successfully ", username , amount);
 
-        return "Message of Object type user was Published";
+        return "Message of Object type user: "+username+" with amount: " +amount +" was Published";
     }
 
 }

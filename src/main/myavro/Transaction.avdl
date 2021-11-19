@@ -1,0 +1,16 @@
+/**
+ * AVRO IDL for (emdb-etl) Contributor
+ * https://github.com/bazaarvoice/emodb-etl/blob/master/schemas/contributor.20200624.json-schema.json
+ */
+@namespace("com.bazaarvoice.legion.schema.emodb.transaction")
+protocol TransactionProtocol {
+
+	record Transaction {
+
+		union {null, string} customername = null;
+		union {null, int}  amount = null;
+		union {null, boolean} status = null;
+
+	}
+
+}
